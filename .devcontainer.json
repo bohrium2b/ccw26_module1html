@@ -12,7 +12,7 @@
 			"onAutoForward": "ignore"
 		}
 	},
-	"postCreateCommand": "bash /usr/local/bin/start-services.sh",
+	"postStartCommand": "bash /usr/local/bin/start-services.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
