@@ -1,0 +1,29 @@
+{
+	"name": "LAMP Stack Development",
+	"image": "bohrium2b/lamp_stack:latest",
+	"forwardPorts": [80, 3306],
+	"portsAttributes": {
+		"80": {
+			"label": "Apache Web Server",
+			"onAutoForward": "notify"
+		},
+		"3306": {
+			"label": "MariaDB",
+			"onAutoForward": "ignore"
+		}
+	},
+	"postCreateCommand": "bash /usr/local/bin/start-services.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bmewburn.vscode-intelephense-client",
+				"xdebug.php-debug",
+				"whatwedo.twig"
+			],
+			"settings": {
+				"php.validate.executablePath": "/usr/bin/php"
+			}
+		}
+	},
+	"remoteUser": "vscode"
+}
