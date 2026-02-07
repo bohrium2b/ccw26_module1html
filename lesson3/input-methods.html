@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Methods</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</head>
+<body class="container mt-5">
+    <h1>Input Methods</h1>
+    <p>Here are some other input methods: </p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Input Type</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Text</th>
+                <td>A single-line text input field.</td>
+                <td><input type="text" class="form-control" placeholder="Enter text"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>A single-line text input field that hides the entered characters.</td>
+                <td><input type="password" class="form-control" placeholder="Enter password"></td>
+            </tr>
+            <tr>
+                <th>Radio</th>
+                <td>A set of options where only one can be selected.</td>
+                <td>
+                    <input type="radio" name="exampleRadio" id="radio1" class="form-check-input">
+                    <label for="radio1" class="form-check-label">Option 1</label>
+                    <input type="radio" name="exampleRadio" id="radio2" class="form-check-input">
+                    <label for="radio2" class="form-check-label">Option 2</label>
+                </td>
+            </tr>
+            <tr>
+                <th>Checkbox</th>
+                <td>A set of options where multiple can be selected.</td>
+                <td>
+                    <input type="checkbox" id="checkbox1" class="form-check-input">
+                    <label for="checkbox1" class="form-check-label">Option 1</label>
+                    <input type="checkbox" id="checkbox2" class="form-check-input">
+                    <label for="checkbox2" class="form-check-label">Option 2</label>
+                </td>
+            </tr>
+            <tr>
+                <th>Submit</th>
+                <td>A button that submits the form data to the server.</td>
+                <td><input type="submit" class="btn btn-primary" value="Submit"></td>
+            </tr>
+            <tr>
+                <th>Text Area</th>
+                <td>A multi-line text input field.</td>
+                <td><textarea class="form-control" rows="3" placeholder="Enter text"></textarea></td>
+            </tr>
+        </tbody>
+</body>
+</html>
