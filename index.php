@@ -41,7 +41,7 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
     <!-- Highlight.js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/sunburst.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script>hljs.configure({ignoreUnescapedHTML: true});</script>
     <style>
@@ -86,8 +86,9 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
             border-radius: 4px;
         }
 
-        pre {
+        .hljs {
             border-radius: 10px;
+            background-color: #eeeeee !important;
         }
     </style>
 </head>
@@ -96,7 +97,7 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4 col-md-3 sidebar bg-light">
+            <div class="col-4 col-md-2 sidebar bg-light">
                 <h5><code><?php echo htmlspecialchars(basename(__DIR__)); ?></code></h5>
                 <div class="file-list">
                     <?php
@@ -113,9 +114,9 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
                     }
 
                     // Files to show (extensions)
-                    $allowedExt = ['html', 'htm', 'php'];
+                    $allowedExt = ['html', 'htm', 'php', 'css', 'js'];
 
-                    function list_dir($dir, $rootDir)
+                    function list_dir($dir, $rootDir, $allowedExt)
                     {
                         $items = scandir($dir);
                         if ($items === false) return;
@@ -127,11 +128,11 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
                             if (is_dir($full)) {
                                 echo '<li class="mt-2">';
                                 echo '<div class="folder-name"><code>' . htmlspecialchars($item) . '</code></div>';
-                                list_dir($full, $rootDir);
+                                list_dir($full, $rootDir, $allowedExt);
                                 echo '</li>';
                             } else {
                                 $ext = strtolower(pathinfo($item, PATHINFO_EXTENSION));
-                                if (!in_array($ext, ['html', 'htm', 'php'])) continue;
+                                if (!in_array($ext, $allowedExt)) continue;
                                 // Skip the demo viewer itself
                                 if (realpath($full) === realpath(__FILE__)) continue;
                                 $href = url_path($full, $rootDir);
@@ -143,7 +144,7 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
                     }
 
                     // Start listing from current directory
-                    list_dir($root, $root);
+                    list_dir($root, $root, $allowedExt);
                     ?>
                 </div>
             </div>
@@ -164,7 +165,7 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <pre style="max-height:90%;overflow:auto;"><code id="sourceCode" class="language-html"></code></pre>
+        <pre style="max-height:90%;overflow:auto;"><code id="sourceCode" ></code></pre>
       </div>
     </div>
 
@@ -226,6 +227,7 @@ if (isset($_GET['source']) && isset($_GET['path'])) {
                 if (!res.ok) throw new Error('Fetch failed ' + res.status);
                 const json = await res.json();
                 sourceCodeEl.getAttribute('data-highlighted') && sourceCodeEl.removeAttribute('data-highlighted');
+                sourceCodeEl.className = 'language-' + (p.split('.').pop() || 'txt');
                 sourceCodeEl.textContent = json.content;
                 hljs.highlightElement(sourceCodeEl);
             } catch (err) {
